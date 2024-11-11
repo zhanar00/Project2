@@ -47,6 +47,7 @@ let weather = {
     search: function () {
         let city = document.querySelector(".search-bar").value;
         this.fetchWeather(city);
+        this.fetchForecast(city);
     }, 
 
     loadWeatherByLocation: function() {
@@ -64,7 +65,35 @@ let weather = {
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
-    }  
+    } ,
+    
+    fetchForecast: function(city) {
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${this.apiKey}`)
+        .then((res) => res.json())
+        .then((data) => this.displayForecast(data));
+    },
+
+    displayForecast: function(data) {
+        const forecastDiv = document.getElementById("forecast");
+        forecastDiv.innerHTML = "";
+
+        for(let i = 0; i < 5; i++) {
+            const forecast = data.list[i * 8];
+            const date = new Date(forecast.dt * 1000).toLocaleDateString();
+            const { icon } = forecast.weather[0];
+            const { temp_max, temp_min } = forecast.main;
+
+            const dayDiv = document.createElement("div");
+        dayDiv.className = "forecast-day";
+        dayDiv.innerHTML = `
+            <h4>${date}</h4>
+            <img src="https://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">
+            <p>High: ${Math.round(temp_max)}°C</p>
+            <p>Low: ${Math.round(temp_min)}°C</p>
+        `;
+        forecastDiv.appendChild(dayDiv);
+        }
+    }
 };
 
 document

@@ -25,7 +25,7 @@ body {
     padding: 20px;
     border-radius: 30px;
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
     margin: 16px;
 
 }
@@ -85,6 +85,10 @@ body {
     align-items: center;
 }
 
+.wind {
+    margin: 10px 0px;
+}
+
 .weather.loading {
     visibility: hidden;
     max-height: 20px;
@@ -98,5 +102,21 @@ body {
     position: absolute;
     top: 0;
     left: 20px;
+}
+
+#forecast {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:   20px;
+    margin-top: 20px;
+}
+
+.forecast-day {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    width: 80px;
 }
 
