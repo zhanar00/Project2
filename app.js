@@ -64,9 +64,7 @@ let weather = {
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
-    }
-    
-    
+    }  
 };
 
 document
@@ -94,7 +92,6 @@ temperatureSection.addEventListener("click", () => {
         tempDegree.innerText = `${weather.celsius}`;
     }
 });
-document.querySelector(".temp").addEventListener("click", () => weather.toggleUnit());
 
 weather.loadWeatherByLocation();
 
