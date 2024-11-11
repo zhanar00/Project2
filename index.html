@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rosario:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="searchBtn"><i class="fas fa-search search-icon"></i></button>
+        </div>
+        <div class="weather loading">
+            <h1 class="city">Weather in Almaty</h1>
+            <div class="degree-section">
+                <h2 class="temp">21</h2>
+                <span>°C</span>
+            </div>
+            <div class="holder">
+                <img src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon">
+                <div class="description">Cloudy</div>
+            </div>
+            <div class="humidity">Humidity: 60%</div>
+            <div class="wind">Wind speed: 6.2 km/h</div>
+        </div>
+    </div>
+</body>
+</html>
