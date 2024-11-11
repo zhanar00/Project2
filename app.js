@@ -39,7 +39,7 @@ let weather = {
         document.querySelector(".weather").classList.remove("loading");
 
         this.celsius = temp;
-        this.fahrenheit = (temp * 9/5) + 32;
+        this.fahrenheit = ((temp * 9/5) + 32).toFixed(2);
 
         document.querySelector(".temp").innerText = `${this.celsius}`;
     },
@@ -85,7 +85,7 @@ const tempDegree = document.querySelector(".temp");
 
 temperatureSection.addEventListener("click", () => {
     if (temperatureSpan.textContent === "°C") {
-        temperatureSpan.textContent = "F";
+        temperatureSpan.textContent = "°F";
         tempDegree.innerText = `${weather.fahrenheit}`;
     } else {
         temperatureSpan.textContent = "°C";
