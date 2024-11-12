@@ -36,6 +36,7 @@ let weather = {
             cityDiv.innerHTML = city.name;
             cityDiv.addEventListener("click", () => {
                 this.fetchWeather(city.name);
+                this.fetchForecast(city.name);
                 this.clearSuggestions(); 
             });
             suggestionsDiv.appendChild(cityDiv);
@@ -76,7 +77,7 @@ let weather = {
         document.querySelector(".weather").classList.remove("loading");
 
         this.celsius = temp;
-        this.fahrenheit = ((temp * 9/5) + 32).toFixed(2); // Save both values
+        this.fahrenheit = ((temp * 9/5) + 32).toFixed(2); 
     },
 
     search: function () {
@@ -154,10 +155,10 @@ const tempDegree = document.querySelector(".temp");
 temperatureSection.addEventListener("click", () => {
     if (temperatureSpan.textContent === "°C") {
         temperatureSpan.textContent = "°F";
-        tempDegree.innerText = `${weather.fahrenheit}`; // Convert to Fahrenheit
+        tempDegree.innerText = `${weather.fahrenheit}`; 
     } else {
         temperatureSpan.textContent = "°C";
-        tempDegree.innerText = `${weather.celsius}`; // Convert to Celsius
+        tempDegree.innerText = `${weather.celsius}`; 
     }
 });
 

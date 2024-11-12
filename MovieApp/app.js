@@ -76,11 +76,10 @@ function addToWatchlist(id, title, poster_path, vote_average) {
   }
 }
 
-// Функция для отображения Watchlist
 function displayWatchlist() {
-  watchlistMovies.innerHTML = ''; // Очищаем текущий список перед рендером
+  watchlistMovies.innerHTML = ''; 
   if (watchlist.length === 0) {
-    watchlistMovies.innerHTML = "<p>No movies in your watchlist.</p>"; // Сообщение, если список пуст
+    watchlistMovies.innerHTML = "<p>No movies in your watchlist.</p>"; 
   }
   watchlist.forEach(movie => {
     const { title, poster_path, vote_average } = movie;
@@ -95,19 +94,19 @@ function displayWatchlist() {
     `;
     watchlistMovies.appendChild(movieElement);
   });
-  watchlistSection.classList.remove("hidden"); // Показываем секцию с watchlist
+  watchlistSection.classList.remove("hidden"); 
 }
 
 viewWatchlistButton.addEventListener("click", () => {
-  console.log("View Watchlist button clicked"); // Логирование для проверки
-  // Проверяем видимость секции
+  console.log("View Watchlist button clicked");
+
   if (watchlistSection.classList.contains("hidden")) {
-      watchlistSection.classList.remove("hidden"); // Показываем секцию
-      displayWatchlist(); // Отображаем список
-      console.log("Watchlist section shown"); // Логирование для проверки
+      watchlistSection.classList.remove("hidden"); 
+      displayWatchlist(); 
+      console.log("Watchlist section shown"); 
   } else {
-      watchlistSection.classList.add("hidden"); // Скрываем секцию
-      console.log("Watchlist section hidden"); // Логирование для проверки
+      watchlistSection.classList.add("hidden"); 
+      console.log("Watchlist section hidden"); 
   }
 });
 

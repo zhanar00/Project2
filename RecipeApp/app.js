@@ -144,7 +144,6 @@ async function showRecipeDetails(recipeId) {
 
         const summary = recipeData.summary;
         function extractNutritionalInfo(summary) {
-            // Регулярные выражения для поиска питательных веществ
             const nutritionRegex = /(\d+)\s*(calories|g of protein|g of fat|g)/gi;
         
             const nutrients = {
@@ -153,13 +152,11 @@ async function showRecipeDetails(recipeId) {
                 fat: ''
             };
         
-            // Ищем все упоминания питательных веществ
             let matches;
             while ((matches = nutritionRegex.exec(summary)) !== null) {
                 const value = matches[1];
                 const type = matches[2].toLowerCase();
         
-                // Присваиваем значение в нужное поле
                 if (type.includes('calories')) {
                     nutrients.calories = value;
                 } else if (type.includes('protein')) {
@@ -202,4 +199,4 @@ document.querySelector("#query").addEventListener("keyup", function(event) {
     }
 });
 
-window.onload = loadFavorites; // Загружаем избранные рецепты при загрузке страницы
+window.onload = loadFavorites; 

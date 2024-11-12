@@ -128,14 +128,14 @@ body {
     border-radius: 5px;
     max-height: 200px;
     overflow-y: auto;
-    width: calc(100% - 10px); /* Adjust width to match the search bar including padding */
+    width: calc(100% - 10px); 
     position: absolute;
-    top: calc(100% + 5px); /* Adjust positioning to be directly below search bar */
+    top: calc(100% + 5px); 
     left: 0;
     z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
-    padding: 0; /* Remove any padding */
-    margin: 0; /* Remove any margin */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 0; 
+    margin: 0;
 }
 
 .suggestion-item {
