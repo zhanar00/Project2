@@ -16,7 +16,7 @@ Clone the repository to your local machine:
 
 bash
 Копировать код
-git clone https://github.com/your-username/movies-app.git
+git clone https://github.com/zhanar00/movies-app.git
 Navigate to the project folder:
 
 bash
