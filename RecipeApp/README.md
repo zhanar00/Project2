@@ -11,7 +11,7 @@ Installation:
 Clone this repository:
 bash
 Копировать код
-git clone https://github.com/your-username/recipeApp.git
+git clone https://github.com/zhanar00/recipeApp.git
 Open the project folder and start a local server, or simply open index.html in a browser.
 
 Usage:
