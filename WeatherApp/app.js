@@ -1,6 +1,6 @@
+//вызов апи
 let weather = {
     "apiKey": "ee6f9f59bffd29f82eae790285cafe01",
-
     fetchWeather: function(city) {
         fetch(
             "https://api.openweathermap.org/data/2.5/weather?q=" 
@@ -11,7 +11,7 @@ let weather = {
             .then((data) => this.displayWeather(data));
     },
 
-    fetchSuggestions: function(query) {
+    fetchSuggestions: function(query) { //автокомплит который определяет города когда вводят в серч
         if(query.length < 3) {
             document.getElementById("suggestions").innerHTML = '';
             return;
@@ -47,7 +47,7 @@ let weather = {
         document.getElementById("suggestions").innerHTML = "";
     },
 
-    fetchByLocation: function(lat, lon) {
+    fetchByLocation: function(lat, lon) { //для определения геолокации(по дефолту у меня стоит когда делают рефреш)
         fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${this.apiKey}`
         )
@@ -62,7 +62,7 @@ let weather = {
         .catch((error) => console.error("Ошибка загрузки:", error));
     },
 
-    displayWeather: function(data) {
+    displayWeather: function(data) { // для определения погоды
         const { name } = data;
         const { icon, description } = data.weather[0];
         const { temp, humidity } = data.main;
@@ -80,7 +80,7 @@ let weather = {
         this.fahrenheit = ((temp * 9/5) + 32).toFixed(2); 
     },
 
-    search: function () {
+    search: function () { //поиск
         let city = document.querySelector(".search-bar").value;
         this.fetchWeather(city);
         this.fetchForecast(city);
@@ -104,7 +104,7 @@ let weather = {
         }
     },
 
-    fetchForecast: function(city) {
+    fetchForecast: function(city) { // для определения погоды наперед(5 дней)
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${this.apiKey}`)
         .then((res) => res.json())
         .then((data) => this.displayForecast(data));
@@ -133,12 +133,14 @@ let weather = {
     }
 };
 
+//что бы искала погоду при нажатии кнопки серч
 document
     .querySelector(".search button")
     .addEventListener("click", function() {
         weather.search();
     });
 
+//что бы искала при нажатии кнопки ентер
 document.querySelector(".search-bar").addEventListener("keyup", function(event) {
     const query = event.target.value;
     weather.fetchSuggestions(query);
@@ -152,6 +154,7 @@ let temperatureSection = document.querySelector(".degree-section");
 const temperatureSpan = document.querySelector(".degree-section span");
 const tempDegree = document.querySelector(".temp");
 
+//фукнция для свитча между градусами
 temperatureSection.addEventListener("click", () => {
     if (temperatureSpan.textContent === "°C") {
         temperatureSpan.textContent = "°F";
@@ -162,4 +165,6 @@ temperatureSection.addEventListener("click", () => {
     }
 });
 
+
+//вызов общей программы(начало экрана с current location by default)
 weather.loadWeatherByLocation();

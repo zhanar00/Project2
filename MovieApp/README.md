@@ -16,12 +16,11 @@ Clone the repository to your local machine:
 
 bash
 Копировать код
-git clone https://github.com/zhanar00/movies-app.git
+git clone https://github.com/zhanar00/Project2/tree/main/MovieApp
 Navigate to the project folder:
 
 bash
 Копировать код
-cd movies-app
 Open the index.html file in your browser to start using the app.
 
 How it Works:
@@ -30,4 +29,6 @@ All added movies are saved in your browser's localStorage, so your watchlist is 
 The Watchlist page displays all movies that have been added to the list.
 
 Screenshots:
-![Screenshot of RecipeApp](MovieApp\img\screen.png)
+![start page](MovieApp\img\screen1.png)
+![sorting pages](MovieApp\img\screen2.png)
+![watchlist](MovieApp\img\screen3.png)

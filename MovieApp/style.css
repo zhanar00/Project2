@@ -4,14 +4,13 @@
 }
 
 :root {
-    --primary-color:rgb(23, 76, 74);
-    --secendary-color:rgb(27, 93, 91);
+    --primary-color:rgb(112, 25, 25);
+    --secendary-color:rgba(179, 23, 23, 0.889);
 }
 body {
     font-family: "Rosario";
     background-color: var(--primary-color);
-
-    
+    background-image: url(./img/bg.jpg);
 }
 
 header {
@@ -19,6 +18,8 @@ header {
     display: flex;
     justify-content: flex-end;
     background-color: var(--secendary-color);
+    gap: 30px;
+    align-items: center;
 }
 
 #search {
@@ -108,7 +109,8 @@ main {
     right: 0;
     background-color: white;
     padding: 20px;
-    max-height: 100%;
+    max-height: 500px;
+    overflow-y: auto;
     transition: transform 0.3s ease-in;
     transform: translateY(101%);
 }
@@ -157,8 +159,13 @@ main {
     cursor: pointer;
 }
 
+#sort-options option {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
 #watchlist {
-    display: none;
+    /* display: none; */
     background-color: var(--secendary-color);
     padding: 20px;
     color: #333;
@@ -169,11 +176,14 @@ main {
     margin-bottom: 20px;
 }
 
-.hidden {
-    display: none;
+.movie-image-container {
+    position: relative;
 }
-
+  
 .add-to-watchlist {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -181,8 +191,21 @@ main {
     cursor: pointer;
     border-radius: 30px;
     font-size: 14px;
-    margin: 10px;
+}
+  
+#watchlist-movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-
-
+#back-to-main {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    padding: 10px;
+    border-radius: 30px;
+    font-size: 16px;
+    color: white;
+    margin-left: 10px;
+    cursor: pointer;
+}

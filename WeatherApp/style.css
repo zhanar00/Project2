@@ -26,8 +26,10 @@ body {
     border-radius: 30px;
     width: 100%;
     max-width: 520px;
-    margin: 16px;
-
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .search {
@@ -147,5 +149,34 @@ body {
     background-color: #555;
 }
 
+@media (max-width: 650px) {
+    .card {
+        max-width: 420px;
+    }
+    .forecast-day {
+        width: 60px;
+    }
+    .forecast-day h4 {
+        font-size: 16px;
+    }
+}
 
+@media (max-width: 480px) {
+    .card {
+        max-width: 352px;
+        max-height: 660px;
+    }
+    #forecast {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 300px;
+    }
+    .forecast-day {
+        display: flex;
+        width: 320px;
+        gap: 3px;
+        margin: 5px;
+    }
+}
 

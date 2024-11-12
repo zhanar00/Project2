@@ -38,30 +38,53 @@ function showMovies(data) {
 
   data.forEach(movie => {
     const { id, title, poster_path, vote_average, release_date, overview } = movie;
-    const movieElement = document.createElement('div');
-    movieElement.classList.add('movie');
-    movieElement.innerHTML = `
-      <img src="${imgURL + poster_path}" alt="${title}">
-      <div class="movie-info">
-        <div class="info1">
-          <h3>${title}</h3>
-          <span class="${getColor(vote_average)}">${roundVote(vote_average)}</span>
+
+    //запрос для получения актеров и продолжительности фильма
+    Promise.all([
+      fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`)
+        .then(res => res.json()),
+      fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
+        .then(res => res.json())
+    ])
+    .then(([castData, movieData]) => {
+      const actors = castData.cast.slice(0, 10); //до 10 актеров
+      const actorNames = actors.map(actor => actor.name).join(', ');
+      const runtime = movieData.runtime ? `${movieData.runtime} min` : "Not available";
+
+      //создаем карточку фильма
+      const movieElement = document.createElement('div');
+      movieElement.classList.add('movie');
+      movieElement.innerHTML = `
+        <div class="movie-image-container">
+          <img src="${imgURL + poster_path}" alt="${title}">
+          <button class="add-to-watchlist" onclick="addToWatchlist(${id}, '${title}', '${poster_path}', ${vote_average})">
+            Add to Watchlist
+          </button>
         </div>
-        <div class="info2">
-          <p>Release: ${release_date ? release_date: "N/A"}</p>
+        <div class="movie-info">
+          <div class="info1">
+            <h3>${title}</h3>
+            <span class="${getColor(vote_average)}">${roundVote(vote_average)}</span>
+          </div>
+          <div class="info2">
+            <p>Release: ${release_date ? release_date : "N/A"}</p>
+          </div>
         </div>
-      </div>
-      <button class="add-to-watchlist" onclick="addToWatchlist(${id}, '${title}', '${poster_path}', ${vote_average})">
-        Add to Watchlist
-      </button>
-      <div class="overview">
-        <h3>Overview:</h3>
-        ${overview}
-      </div>
-    `;
-    main.appendChild(movieElement);
+        <div class="overview">
+          <h3>Overview:</h3>
+          ${overview}
+          <p><strong>Runtime:</strong> ${runtime}</p>
+          <p><strong>Cast:</strong> ${actorNames ? actorNames : "Not available"}</p>
+        </div>
+      `;
+
+      main.appendChild(movieElement);
+    })
+    .catch(error => console.error("Error fetching movie details:", error));
   });
 }
+
+
 
 function addToWatchlist(id, title, poster_path, vote_average) {
   const movie = { id, title, poster_path, vote_average };
@@ -99,6 +122,7 @@ function displayWatchlist() {
 
 viewWatchlistButton.addEventListener("click", () => {
   console.log("View Watchlist button clicked");
+  window.location.href = "watchlist.html";
 
   if (watchlistSection.classList.contains("hidden")) {
       watchlistSection.classList.remove("hidden"); 
@@ -109,6 +133,7 @@ viewWatchlistButton.addEventListener("click", () => {
       console.log("Watchlist section hidden"); 
   }
 });
+
 
 
 
@@ -147,6 +172,15 @@ search.addEventListener('input', () => {
   }
 });
 
+search.addEventListener('enter', () => {
+  const query = search.value;
+  if (query.length > 1) {
+    fetchSuggestions(query);
+  } else {
+    suggestionBox.innerHTML = ''; 
+  }
+});
+
 async function fetchSuggestions(query) {
   try {
     const response = await fetch(`${searchURL}&query=${query}`);
@@ -170,3 +204,4 @@ function showSuggestions(movies) {
     suggestionBox.appendChild(suggestionItem);
   });
 }
+

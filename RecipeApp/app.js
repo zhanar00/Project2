@@ -1,6 +1,7 @@
 const apiKey = "ed4db148a77f4bf78fd11ea6d3a211be";
 
-async function fetchSuggestions() {
+
+async function fetchSuggestions() { //автокомплит для вариантов рецепта по игридиенту или названию
     const query = document.getElementById("query").value;
     const suggestionContainer = document.getElementById("suggestions-container");
 
@@ -39,7 +40,7 @@ function selectSuggestion(recipeTitle) {
     searchRecipes();
 }
 
-async function searchRecipes() {
+async function searchRecipes() { //поиск рецептов с апи адреса
     const searchQuery = document.getElementById("query").value;
     try {
         const results = await fetch(
@@ -62,7 +63,7 @@ async function searchRecipes() {
                 recipeImage.alt = recipe.title;
                 const recipeLink = document.createElement("a");
                 recipeLink.href = "#";
-                recipeLink.textContent = "View Recipe";
+                recipeLink.textContent = "recipe⇲";
                 recipeLink.onclick = async function() {
                     await showRecipeDetails(recipe.id);
                 };
@@ -73,7 +74,7 @@ async function searchRecipes() {
                     addToFavorites(recipe.id); 
                 };
 
-                recipeItem.appendChild(recipeImage);
+                recipeItem.appendChild(recipeImage); //добавление элементов что бы были видимы на странице
                 recipeItem.appendChild(recipeTitle);
                 recipeItem.appendChild(recipeLink);
                 recipeItem.appendChild(favoriteIcon); 
@@ -85,7 +86,7 @@ async function searchRecipes() {
     }
 }
 
-function addToFavorites(recipeId) {
+function addToFavorites(recipeId) { //добавление рецептов в список любимых
     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (!favorites.includes(recipeId)) {
         favorites.push(recipeId);
@@ -97,7 +98,7 @@ function addToFavorites(recipeId) {
     }
 }
 
-async function loadFavorites() {
+async function loadFavorites() { //загрузка любимых рецептов
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     const favoritesList = document.getElementById("favorites-list");
     favoritesList.innerHTML = ""; 
@@ -119,7 +120,7 @@ async function loadFavorites() {
             recipeImage.alt = recipeData.title;
             const recipeLink = document.createElement("a");
                 recipeLink.href = "#";
-                recipeLink.textContent = "View Recipe";
+                recipeLink.textContent = "recipe⇲";
                 recipeLink.onclick = async function() {
                     await showRecipeDetails(recipeId);
                 };
@@ -132,13 +133,13 @@ async function loadFavorites() {
 }
 
 
-async function showRecipeDetails(recipeId) {
+async function showRecipeDetails(recipeId) { //основная функция показа рецептов с апи
     const recipeDetailsDiv = document.getElementById("recipe-details");
     const recipeContentDiv = document.getElementById("recipe-content");
 
     try{
         const results = await fetch(
-            `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`
+            `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}` //вызов апи
         );
         const recipeData = await results.json();
 
@@ -170,6 +171,7 @@ async function showRecipeDetails(recipeId) {
         }
         const nutritionalInfo = extractNutritionalInfo(summary);
 
+        //внешний вид вызова уже на странице
         recipeContentDiv.innerHTML = `
             <h2>${recipeData.title}</h2>
             <img src="${recipeData.image}" alt="${recipeData.title}">
@@ -188,15 +190,18 @@ async function showRecipeDetails(recipeId) {
 
 }
 
+//закрытие детялей рецепта
 function closeRecipeDetails() {
     const recipeDetailsDiv = document.getElementById("recipe-details");
     recipeDetailsDiv.style.display = "none";
 }
 
+//при нажатии кнопки ентер искать рецепты
 document.querySelector("#query").addEventListener("keyup", function(event) {
     if (event.key == "Enter") {
         searchRecipes();
     }
 });
 
+//вызов функции листа с любимыми рецептами
 window.onload = loadFavorites; 
