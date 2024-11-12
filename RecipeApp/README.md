@@ -25,5 +25,12 @@ CSS
 JavaScript
 
 Screenshots:
-![Screenshot of WeatherApp](./path/to/your/screenshot.png)
+![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-12 131338.png)
+![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-12 131428.png)
+![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-12 132707.png)
+![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-11 231028.png)
+
+
+
+
 

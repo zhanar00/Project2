@@ -6,32 +6,36 @@ async function fetchSuggestions() {
 
     if(query.length === 0) {
         suggestionContainer.innerHTML = "";
+        suggestionContainer.style.display = "none";
         return;
     }
 
     try {
-        const responce = await fetch(
-            `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`
-        );
-        const data = await responce.json();
+        const response = await fetch(
+            `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`);
+        const data = await response.json();
 
         if(data.results.length > 0) {
             suggestionContainer.innerHTML = data.results.map((recipe) => { 
                 return `<div class="suggestion-item" onclick="selectSuggestion('${recipe.title}')">${recipe.title}</div>`;
             })
             .join("");
+            suggestionContainer.style.display = "block";
         } else {
             suggestionContainer.innerHTML = "<div>No suggestions found</div>";
+            suggestionContainer.style.display = "block";
         }
     }
     catch(error) {
         console.log("Error fetching suggestions:", error);
+        suggestionContainer.style.display = "block";
     }
 }
 
 function selectSuggestion(recipeTitle) {
     document.getElementById("query").value = recipeTitle;
     document.getElementById("suggestions-container").innerHTML = "";
+    document.getElementById("suggestions-container").style.display = "none";
     searchRecipes();
 }
 
@@ -113,8 +117,15 @@ async function loadFavorites() {
             const recipeImage = document.createElement("img");
             recipeImage.src = recipeData.image;
             recipeImage.alt = recipeData.title;
+            const recipeLink = document.createElement("a");
+                recipeLink.href = "#";
+                recipeLink.textContent = "View Recipe";
+                recipeLink.onclick = async function() {
+                    await showRecipeDetails(recipeId);
+                };
             recipeItem.appendChild(recipeImage);
             recipeItem.appendChild(recipeTitle);
+            recipeItem.appendChild(recipeLink);
             favoritesList.appendChild(recipeItem);
         }
     }

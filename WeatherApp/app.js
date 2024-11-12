@@ -1,5 +1,6 @@
 let weather = {
     "apiKey": "ee6f9f59bffd29f82eae790285cafe01",
+
     fetchWeather: function(city) {
         fetch(
             "https://api.openweathermap.org/data/2.5/weather?q=" 
@@ -8,6 +9,41 @@ let weather = {
         )
             .then((res) => res.json())
             .then((data) => this.displayWeather(data));
+    },
+
+    fetchSuggestions: function(query) {
+        if(query.length < 3) {
+            document.getElementById("suggestions").innerHTML = '';
+            return;
+        }
+        fetch(`https://api.openweathermap.org/data/2.5/find?q=${query}&type=like&sort=population&cnt=5&appid=${this.apiKey}`)
+            .then((res) => res.json())
+            .then((data) => this.displayCitySuggestions(data));
+    },
+
+    displayCitySuggestions: function(data) {
+        const suggestionsDiv = document.getElementById("suggestions");
+        suggestionsDiv.innerHTML = "";
+        
+        if (data.list.length === 0) {
+            suggestionsDiv.innerHTML = "<p>No cities found</p>";
+            return;
+        }
+
+        data.list.forEach((city) => {
+            const cityDiv = document.createElement("div");
+            cityDiv.className = "suggestion-item";
+            cityDiv.innerHTML = city.name;
+            cityDiv.addEventListener("click", () => {
+                this.fetchWeather(city.name);
+                this.clearSuggestions(); 
+            });
+            suggestionsDiv.appendChild(cityDiv);
+        });
+    },
+
+    clearSuggestions: function() {
+        document.getElementById("suggestions").innerHTML = "";
     },
 
     fetchByLocation: function(lat, lon) {
@@ -30,25 +66,25 @@ let weather = {
         const { icon, description } = data.weather[0];
         const { temp, humidity } = data.main;
         const { speed } = data.wind;
+
         document.querySelector(".city").innerText = "Weather in " + name;
         document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png";
         document.querySelector(".description").innerText = description;
-        document.querySelector(".temp").innerText = temp;
+        document.querySelector(".temp").innerText = `${Math.round(temp)}`; // Display Celsius by default
         document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
         document.querySelector(".wind").innerText = "Wind speed: " + speed + "km/h";
         document.querySelector(".weather").classList.remove("loading");
 
         this.celsius = temp;
-        this.fahrenheit = ((temp * 9/5) + 32).toFixed(2);
-
-        document.querySelector(".temp").innerText = `${this.celsius}`;
+        this.fahrenheit = ((temp * 9/5) + 32).toFixed(2); // Save both values
     },
 
     search: function () {
         let city = document.querySelector(".search-bar").value;
         this.fetchWeather(city);
         this.fetchForecast(city);
-    }, 
+        this.clearSuggestions();
+    },
 
     loadWeatherByLocation: function() {
         if (navigator.geolocation) {
@@ -65,8 +101,8 @@ let weather = {
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
-    } ,
-    
+    },
+
     fetchForecast: function(city) {
         fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${this.apiKey}`)
         .then((res) => res.json())
@@ -84,14 +120,14 @@ let weather = {
             const { temp_max, temp_min } = forecast.main;
 
             const dayDiv = document.createElement("div");
-        dayDiv.className = "forecast-day";
-        dayDiv.innerHTML = `
-            <h4>${date}</h4>
-            <img src="https://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">
-            <p>High: ${Math.round(temp_max)}°C</p>
-            <p>Low: ${Math.round(temp_min)}°C</p>
-        `;
-        forecastDiv.appendChild(dayDiv);
+            dayDiv.className = "forecast-day";
+            dayDiv.innerHTML = `
+                <h4>${date}</h4>
+                <img src="https://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">
+                <p>High: ${Math.round(temp_max)}°C</p>
+                <p>Low: ${Math.round(temp_min)}°C</p>
+            `;
+            forecastDiv.appendChild(dayDiv);
         }
     }
 };
@@ -103,7 +139,10 @@ document
     });
 
 document.querySelector(".search-bar").addEventListener("keyup", function(event) {
-    if (event.key == "Enter") {
+    const query = event.target.value;
+    weather.fetchSuggestions(query);
+
+    if (event.key === "Enter") {
         weather.search();
     }
 });
@@ -115,13 +154,11 @@ const tempDegree = document.querySelector(".temp");
 temperatureSection.addEventListener("click", () => {
     if (temperatureSpan.textContent === "°C") {
         temperatureSpan.textContent = "°F";
-        tempDegree.innerText = `${weather.fahrenheit}`;
+        tempDegree.innerText = `${weather.fahrenheit}`; // Convert to Fahrenheit
     } else {
         temperatureSpan.textContent = "°C";
-        tempDegree.innerText = `${weather.celsius}`;
+        tempDegree.innerText = `${weather.celsius}`; // Convert to Celsius
     }
 });
 
 weather.loadWeatherByLocation();
-
-

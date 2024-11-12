@@ -6,6 +6,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;   
+    background-color: antiquewhite;
 }
 
 .recipe {
@@ -165,13 +166,13 @@ body {
     position: absolute;
     background-color: white;
     border: 1px solid #ccc;
-    width: calc(30vw + 20px); /* Same width as input field with some padding */
+    width: calc(30vw + 20px); 
     max-height: 200px;
     overflow-y: auto;
     z-index: 100;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none;
+    display: none; 
 }
 
 .suggestion-item {
@@ -186,4 +187,3 @@ body {
 #search-form {
     position: relative;
 }
-

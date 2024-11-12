@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rosario:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <form id="form">
+            <input type="text" placeholder="Search..." id="search">
+            <div id="suggestions" class="suggestions-box"></div>
+        </form>
+        <select id="sort-options">
+            <option value="popularity.desc">Sort by Popularity</option>
+            <option value="release_date.desc">Sort by Release Date</option>
+            <option value="vote_average.desc">Sort by Rating</option>
+        </select>
+        <button id="view-watchlist">View Watchlist</button>
+    </header>
+
+    <main id="main">
+        <div class="movie">
+            <img src="./img/bg-cinema.jpg" alt="movie-img">
+            <div class="movie-info">
+                <div class="info1">
+                    <h3>Movie Title</h3>
+                <span class="green">9.0</span>
+                </div>
+                <div class="info2">
+                    <p>Release: </p>
+                </div>
+            </div>
+
+            <div class="overview">
+                <h3>Overview: </h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Illo, amet? Tenetur mollitia porro reiciendis similique eos explicabo
+                doloribus accusantium minima, nobis quo atque culpa aspernatur 
+                illum aut, corporis corrupti fugiat.
+            </div>
+        </div>
+    </main>
+    <section id="watchlist" class="hidden">
+        <h2>My Watchlist</h2>
+        <div id="watchlist-movies"></div>
+    </section>
+</body>
+</html>

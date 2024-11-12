@@ -19,5 +19,5 @@ CSS
 JavaScript
 
 Screenshots:
-![Screenshot of WeatherApp](WeatherApp\img\current-place-weather.png)
+![Screenshot of WeatherApp](WeatherApp\img\current-location-weather.png)
 ![Screenshot of WeatherApp](WeatherApp\img\search-city.png)

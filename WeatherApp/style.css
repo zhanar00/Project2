@@ -34,6 +34,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .searchBtn {
@@ -61,7 +62,9 @@ body {
     background: #7c7c7c2b;
     color: white;
     font-size: 105%;
-    width: calc(100% - 100px);
+    /* width: calc(100% - 100px); */
+    width: 100%;
+
 }
 
 .degree-section {
@@ -119,4 +122,30 @@ body {
     text-align: center;
     width: 80px;
 }
+.suggestions {
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: calc(100% - 10px); /* Adjust width to match the search bar including padding */
+    position: absolute;
+    top: calc(100% + 5px); /* Adjust positioning to be directly below search bar */
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+    padding: 0; /* Remove any padding */
+    margin: 0; /* Remove any margin */
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #555;
+}
+
+
 

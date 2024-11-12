@@ -18,7 +18,7 @@
         <div class="container">
             <h1>Recipe FInder</h1>
             <div id="search-form">
-                <input type="text" id="query" placeholder="Search for recipes...">
+                <input type="text" id="query" oninput="fetchSuggestions()" placeholder="Search for recipes...">
                 <button id="search-button" onclick="searchRecipes()">Search</button>
             </div>
             <div id="suggestions-container"></div>
