@@ -25,11 +25,10 @@ CSS
 JavaScript
 
 Screenshots:
-![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-12 131338.png)
-![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-12 131428.png)
-![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-12 132707.png)
-![Screenshot of RecipeApp](RecipeApp\img\Снимок экрана 2024-11-11 231028.png)
-
+![Screenshot of RecipeApp](RecipeApp\img\screen1.png)
+![Screenshot of RecipeApp](RecipeApp\img\screen2.png)
+![Screenshot of RecipeApp](RecipeApp\img\screen3.png)
+![Screenshot of RecipeApp](RecipeApp\img\screen4.png)
 
 
 

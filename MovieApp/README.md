@@ -30,4 +30,4 @@ All added movies are saved in your browser's localStorage, so your watchlist is 
 The Watchlist page displays all movies that have been added to the list.
 
 Screenshots:
-![Screenshot of RecipeApp](MovieApp\img\Снимок экрана 2024-11-12 225537.png)
+![Screenshot of RecipeApp](MovieApp\img\screen.png)
